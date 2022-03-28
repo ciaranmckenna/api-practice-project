@@ -1,0 +1,11 @@
+package com.ciaranmckenna.apipracticeproject.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class Organizations {
+
+    @GetMapping("/")
+    public String organizations(){ return "organizations";}
+}
