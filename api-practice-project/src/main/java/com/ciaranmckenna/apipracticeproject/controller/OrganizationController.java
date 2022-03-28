@@ -19,4 +19,6 @@ public class OrganizationController {
     @GetMapping(ORGANIZATIONS)
     public ResponseEntity<String> getOrganizations(){
         return ResponseEntity.ok(organizationService.getOrganizations());}
+
+    
 }
