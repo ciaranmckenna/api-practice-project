@@ -22,7 +22,7 @@ class OrganizationsTest {
 
     @Test
     void testOrganizations() throws Exception {
-        mockMvc.perform(get("/"))
+        mockMvc.perform(get("/organizations"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("organizations"))
                 .andExpect(content().string(

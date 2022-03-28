@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class Organizations {
 
-    @GetMapping("/")
+    @GetMapping("/organizations")
     public String organizations(){ return "organizations";}
 }
