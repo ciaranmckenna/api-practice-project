@@ -22,8 +22,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class OrganizationsControllerTest {
 
-    @Autowired private MockMvc mockMvc;
-    @MockBean private OrganizationService service;
+    @Autowired
+    private MockMvc mockMvc;
+    @MockBean
+    private OrganizationService service;
 
     @Test
     void testGetOrganizations() throws Exception {
