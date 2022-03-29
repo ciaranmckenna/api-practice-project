@@ -20,5 +20,5 @@ public class OrganizationController {
     public ResponseEntity<String> getOrganizations(){
         return ResponseEntity.ok(organizationService.getOrganizations());}
 
-    
+
 }
