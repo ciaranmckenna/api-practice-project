@@ -18,7 +18,7 @@ public class OrganizationService {
         return organizationsRepository.findByOrganization();
     }
 
-    public String[] getOrganizationsId(String[] array){
-        return organizationsRepository.findByOrganizationId(array);
+    public String getOrganizationsId(Integer id){
+        return organizationsRepository.findByOrganizationId(id);
     }
 }

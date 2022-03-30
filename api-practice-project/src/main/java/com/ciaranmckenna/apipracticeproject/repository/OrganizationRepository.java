@@ -2,8 +2,6 @@ package com.ciaranmckenna.apipracticeproject.repository;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
 public class OrganizationRepository {
 
@@ -11,15 +9,9 @@ public class OrganizationRepository {
         return "organizations";
     }
 
-    public String[] findByOrganizationId(String[] arr){
-        //return generateOrganizationId(organizationId);
-        arr = new String[]{};
-        return arr;
-        //return new UUID(1L, 1L);
+    public String findByOrganizationId(Integer id){ // using Integer as int was failing on optional
+
+        return Integer.toString(id);
     }
 
-    /*public static String[] generateOrganizationId(final UUID organizationId){
-
-        return new String[]{};
-    }*/
 }
