@@ -3,6 +3,8 @@ package com.ciaranmckenna.apipracticeproject.service;
 import com.ciaranmckenna.apipracticeproject.repository.OrganizationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class OrganizationService {
 
@@ -14,5 +16,9 @@ public class OrganizationService {
 
     public String getOrganizations(){
         return organizationsRepository.findByOrganization();
+    }
+
+    public String[] getOrganizationsId(String[] array){
+        return organizationsRepository.findByOrganizationId(array);
     }
 }
