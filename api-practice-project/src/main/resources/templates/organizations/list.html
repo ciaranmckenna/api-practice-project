@@ -13,8 +13,8 @@
         <th>Name</th>
     </tr>
     <tr th:each="organization: ${organizations}">
-    <td th:text="${organization.id}">123</td>
-    <td th:text="${organization.name}">Organisation Company</td>
+    <td th:text="${organization.organizationId}"></td>
+    <td th:text="${organization.organizationName}"></td>
     </tr>
 </table>
 </body>
