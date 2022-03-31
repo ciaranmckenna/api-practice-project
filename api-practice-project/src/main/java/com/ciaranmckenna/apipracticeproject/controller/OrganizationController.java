@@ -21,4 +21,11 @@ public class OrganizationController {
         return "organizations/list";
     }
 
+    @RequestMapping("/organizations")
+    public String getOrganizationsById(Model model){
+
+        model.addAttribute("organizations", organizationRepository.findAll());
+        return "organizations/list";
+    }
+
 }

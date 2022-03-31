@@ -70,7 +70,6 @@ public class Organization {
         return "Organization{" +
                 "organizationId=" + organizationId +
                 ", organizationName='" + organizationName + '\'' +
-                ", applications=" + applications +
                 '}';
     }
 }

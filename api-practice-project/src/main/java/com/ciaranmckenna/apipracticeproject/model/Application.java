@@ -88,7 +88,6 @@ public class Application {
         return "Application{" +
                 "applicationId=" + applicationId +
                 ", applicationName='" + applicationName + '\'' +
-                ", organization=" + organization +
                 '}';
     }
 }

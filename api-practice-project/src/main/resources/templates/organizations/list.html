@@ -10,9 +10,11 @@
 <table>
     <tr>
         <th>ID</th>
+        <th>Name</th>
     </tr>
     <tr th:each="organization: ${organizations}">
-        <td th:text="${organization.id}">123</td>
+    <td th:text="${organization.id}">123</td>
+    <td th:text="${organization.name}">Organisation Company</td>
     </tr>
 </table>
 </body>

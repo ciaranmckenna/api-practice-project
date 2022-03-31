@@ -28,20 +28,17 @@ public class DatabasePersistenceConfig implements CommandLineRunner {
         Organization organizationA = new Organization("Organization_A");
         Application applicationA = new Application("Application_A");
         Platform platformA = new Platform("Platform_A");
-        platformRepository.save(platformA);
-
-        Organization organizationB = new Organization("Organization_B");
-        Application applicationB = new Application("Application_B");
 
         organizationA.getApplications().add(applicationA);
         applicationA.getOrganization().add(organizationA);
 
-        applicationA.setPlatform(platformA);
-        platformA.getApplications().add(applicationA); //
-
         organizationRepository.save(organizationA);
         applicationRepository.save(applicationA);
+
         platformRepository.save(platformA);
+
+        Organization organizationB = new Organization("Organization_B");
+        Application applicationB = new Application("Application_B");
 
         organizationB.getApplications().add(applicationB);
         applicationB.getOrganization().add(organizationB);
@@ -49,11 +46,19 @@ public class DatabasePersistenceConfig implements CommandLineRunner {
         organizationRepository.save(organizationB);
         applicationRepository.save(applicationB);
 
+        applicationA.setPlatform(platformA);
+        platformA.getApplications().add(applicationA); //
+        platformRepository.save(platformA);
+
+
+
+
+
         // LOGGING CODE FOR REFERENCE
         System.out.println("Started in DPC");
         System.out.println("Number of Organizations " + organizationRepository.count());
         System.out.println("Number of Applications " + applicationRepository.count());
-        System.out.println("Number of Platforms " + platformRepository.count());
+        System.out.println("Platform: number of organizations " + platformA.getApplications().size());
 
     }
 }
