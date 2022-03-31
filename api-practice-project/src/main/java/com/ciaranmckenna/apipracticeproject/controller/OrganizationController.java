@@ -1,30 +1,24 @@
 package com.ciaranmckenna.apipracticeproject.controller;
 
-import com.ciaranmckenna.apipracticeproject.service.OrganizationService;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.ciaranmckenna.apipracticeproject.repository.OrganizationRepository;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class OrganizationController {
-    // endpoints
-    public static final String ORGANIZATIONS_URL = "/organizations";
-    public static final String ORGANIZATIONS_ID_URL = "/organizations/{id}";
 
-    private final OrganizationService organizationService;
+    private final OrganizationRepository organizationRepository;
 
-    public OrganizationController(final OrganizationService organizationService) {
-        this.organizationService = organizationService;
+    public OrganizationController(OrganizationRepository organizationRepository) {
+        this.organizationRepository = organizationRepository;
     }
 
-    @GetMapping(ORGANIZATIONS_URL)
-    public ResponseEntity<String> getOrganizations(){
-        return ResponseEntity.ok(organizationService.getOrganizations());}
+    @RequestMapping("/organizations")
+    public String getOrganizations(Model model){
 
-    @GetMapping(value = ORGANIZATIONS_ID_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getOrganizationsId(@PathVariable int id, final Integer organizationId ) {
-        return ResponseEntity.ok(organizationService.getOrganizationsId(organizationId));}
+        model.addAttribute("organizations", organizationRepository.findAll());
+        return "organizations/list";
+    }
 
 }
