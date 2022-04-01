@@ -1,34 +1,64 @@
 package com.ciaranmckenna.apipracticeproject.config;
 
-import org.h2.server.web.WebServlet;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.init.DatabasePopulator;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import com.ciaranmckenna.apipracticeproject.model.Application;
+import com.ciaranmckenna.apipracticeproject.model.Organization;
+import com.ciaranmckenna.apipracticeproject.model.Platform;
+import com.ciaranmckenna.apipracticeproject.repository.ApplicationRepository;
+import com.ciaranmckenna.apipracticeproject.repository.OrganizationRepository;
+import com.ciaranmckenna.apipracticeproject.repository.PlatformRepository;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
-@Configuration
-public class DatabasePersistenceConfig {
+@Component
+public class DatabasePersistenceConfig implements CommandLineRunner {
 
-    @Bean(name = "dataSource")
-    public DriverManagerDataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:file:./data/sample");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("");
+    private final OrganizationRepository organizationRepository;
+    private final ApplicationRepository applicationRepository;
+    private final PlatformRepository platformRepository;
 
-        // schema init
-        Resource initSchema = new ClassPathResource("resources/schema.sql");
-        Resource initData = new ClassPathResource("resources/data.sql");
-        DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema, initData);
-        DatabasePopulatorUtils.execute(databasePopulator, dataSource);
+    public DatabasePersistenceConfig(OrganizationRepository organizationRepository, ApplicationRepository applicationRepository, PlatformRepository platformRepository) {
+        this.organizationRepository = organizationRepository;
+        this.applicationRepository = applicationRepository;
+        this.platformRepository = platformRepository;
+    }
 
-        return dataSource;
+    @Override
+    public void run(String... args) throws Exception {
+
+        Organization organizationA = new Organization("Organization_A");
+        Application applicationA = new Application("Application_A");
+        Platform platformA = new Platform("Platform_A");
+
+        organizationA.getApplications().add(applicationA);
+        applicationA.getOrganization().add(organizationA);
+
+        organizationRepository.save(organizationA);
+        applicationRepository.save(applicationA);
+
+        platformRepository.save(platformA);
+
+        Organization organizationB = new Organization("Organization_B");
+        Application applicationB = new Application("Application_B");
+
+        organizationB.getApplications().add(applicationB);
+        applicationB.getOrganization().add(organizationB);
+
+        organizationRepository.save(organizationB);
+        applicationRepository.save(applicationB);
+
+        applicationA.setPlatform(platformA);
+        platformA.getApplications().add(applicationA); //
+        platformRepository.save(platformA);
+
+
+
+
+
+        // LOGGING CODE FOR REFERENCE
+        System.out.println("Started in DPC");
+        System.out.println("Number of Organizations " + organizationRepository.count());
+        System.out.println("Number of Applications " + applicationRepository.count());
+        System.out.println("Platform: number of organizations " + platformA.getApplications().size());
+
     }
 }

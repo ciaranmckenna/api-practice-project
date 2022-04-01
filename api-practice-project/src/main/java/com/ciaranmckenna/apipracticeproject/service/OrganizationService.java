@@ -1,24 +1,14 @@
 package com.ciaranmckenna.apipracticeproject.service;
 
-import com.ciaranmckenna.apipracticeproject.repository.OrganizationRepository;
+import com.ciaranmckenna.apipracticeproject.model.Organization;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+import java.util.Set;
 
 @Service
-public class OrganizationService {
+public interface OrganizationService {
 
-    private final OrganizationRepository organizationsRepository;
+    Set<Organization> getOrganizations();
 
-    public OrganizationService(final OrganizationRepository organizationsRepository) {
-        this.organizationsRepository = organizationsRepository;
-    }
-
-    public String getOrganizations(){
-        return organizationsRepository.findByOrganization();
-    }
-
-    public String getOrganizationsId(Integer id){
-        return organizationsRepository.findByOrganizationId(id);
-    }
+    Organization findById(Integer I);
 }
