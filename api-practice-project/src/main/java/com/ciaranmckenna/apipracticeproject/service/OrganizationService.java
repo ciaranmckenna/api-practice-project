@@ -4,6 +4,7 @@ import com.ciaranmckenna.apipracticeproject.model.Organization;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+
 @Service
 public interface OrganizationService {
 
