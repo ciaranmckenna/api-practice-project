@@ -21,4 +21,11 @@ public class OrganizationController {
         return "organizations/list";
     }
 
+    /*@RequestMapping("/organizations/{id}")
+    public String getOrganizationsById(@PathVariable String id, Model model){
+
+        model.addAttribute("organizations", organizationRepository.findById(Integer.valueOf(id)));
+        return "organizations/list";
+    }*/
+
 }
